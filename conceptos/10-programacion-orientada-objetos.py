@@ -67,7 +67,10 @@ class Ingrediente:
         self.unidad = unidad
 
     def __str__(self):
-        return f"{self.cantidad} {self.unidad} de {self.nombre}"
+        return f"{self.cantidad} {self.unidad} de {self.nombre}" # String interpolation
+
+    def escalar(self, factor_escalado):
+        return Ingrediente(self.nombre, self.cantidad * factor_escalado, self.unidad)
 
 # Me voy a definir mi nuevo tipo de dato
 class Receta:
@@ -80,7 +83,20 @@ class Receta:
         self.tipo_plato = tipo_plato
         self.ingredientes = ingredientes
         self.procedimiento = procedimiento
-        
+
+    def escalarIngredientes(self, numero_de_comensales):
+        #ingredientes_escalados = []
+        #factor_escalado = numero_de_comensales / self.porciones
+        #for ingrediente in self.ingredientes:
+        #    ingrediente_escalado = Ingrediente(ingrediente.nombre, ingrediente.cantidad * factor_escalado, ingrediente.unidad)
+        #    ingredientes_escalados.append(ingrediente_escalado)
+        #return ingredientes_escalados
+        ## Vamos a resolver lo mismo con programación funcional. Lo que vamos a aplicar es un modelo MapReduce
+                  # map
+                  # vvv
+        return list(map(lambda ingrediente: ingrediente.escalar(numero_de_comensales / self.porciones), self.ingredientes))
+              # ^^^
+               #reduce
     def imprimir(self):
         print("="*40)
         print("Receta de: " + self.nombre)
@@ -95,7 +111,7 @@ class Receta:
         else:
             print("Ingredientes: ")
             for ingrediente in self.ingredientes:
-                print(" - " + ingrediente)
+                print(" - " + str(ingrediente))
         print("-"*40)
         print("Procedimiento: ")
         for paso in self.procedimiento:
@@ -128,7 +144,11 @@ receta_de_tortilla_de_papatas = Receta(
                                        )
 receta_de_tortilla_de_papatas.imprimir()
 
-print(str(receta_de_tortilla_de_papatas))
+ingredientes_para_12_comensales = receta_de_tortilla_de_papatas.escalarIngredientes(12)
+print("Ingredientes para 12 comensales:")
+for ingrediente in ingredientes_para_12_comensales:
+    print(" - " + str(ingrediente))
+#print(str(receta_de_tortilla_de_papatas))
 
 #int  33 98
 # Hay una cosa que necesitamos MEMORIZAR. Cuando ejecutamos uan función como esas:
