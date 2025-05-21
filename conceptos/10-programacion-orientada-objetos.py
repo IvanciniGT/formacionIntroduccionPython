@@ -1,0 +1,133 @@
+texto = str("hola") # Dato de tipo str
+numero = 10 # Dato de tipo int
+numero = int( "10" )
+#print(numero)
+
+valor_logico = bool( "true" ) # Dato de tipo bool
+#print(valor_logico)
+
+valor_logico= False
+valor_logico= bool()
+#print(type(valor_logico)) # False
+
+lista = [1,2,3]
+
+lista=list( (1,2,3) )
+
+### Vamos a crear nuestro propio tipo de datos.
+# Receta de cocina
+# Qué caracteriza a una receta?
+# - Nombre del plato
+# - Una lista de ingredientes
+# - Un procedimiento
+# - Un tiempo de preparación
+# - Dificultad
+# - Porciones
+# - Tipo de plato
+
+# Puedo poner una receta en valorAbsoluto?
+# Y elevarla al cuadrado?
+# Saber si cae en bisiesto?
+# Imprimirla bonita? ******
+# escalarIngredientesParaUnNumeroDeComensalesEspecifico? ******
+
+from enum import IntEnum
+
+class Dificultad(IntEnum):
+    ALTA = 3
+    MEDIA = 2
+    BAJA = 1
+
+    def __str__(self):
+        resultado = "Baja"
+        if self == Dificultad.ALTA:
+            resultado = "Alta"
+        elif self == Dificultad.MEDIA:
+            resultado = "Media"
+        return resultado
+
+class TipoPlato(IntEnum):
+    UNICO = 1
+    PRIMERO = 2
+    SEGUNDO = 3
+    POSTRE = 4
+    ENSALADA = 5
+    ASADO = 6
+    SOPA = 7
+    PASTA = 8
+
+    def __str__(self):
+        return str(self.name).title()
+
+# Me voy a definir mi nuevo tipo de dato
+class Receta:
+
+    def __init__(self, nombre, tiempo=1, dificultad=Dificultad.BAJA, porciones=2, tipo_plato=TipoPlato.PRIMERO, ingredientes=[], procedimiento=[]):
+        self.nombre = nombre.upper()
+        self.tiempo = tiempo
+        self.dificultad = dificultad
+        self.porciones = porciones
+        self.tipo_plato = tipo_plato
+        self.ingredientes = ingredientes
+        self.procedimiento = procedimiento
+        
+    def imprimir(self):
+        print("="*40)
+        print("Receta de: " + self.nombre)
+        print("="*40)
+        print("Tiempo de preparación: " + str(self.tiempo) + " minutos")
+        print("Dificultad: " + str(self.dificultad))
+        print("Porciones: " + str(self.porciones))
+        print("Tipo de plato: " + str(self.tipo_plato))
+        print("-"*40)
+        if(len(self.ingredientes)==0):
+            print("No hay ingredientes")
+        else:
+            print("Ingredientes: ")
+            for ingrediente in self.ingredientes:
+                print(" - " + ingrediente)
+        print("-"*40)
+        print("Procedimiento: ")
+        for paso in self.procedimiento:
+            print(" - " + paso)
+        print("-"*40)
+
+    def __str__(self):
+        return "Receta de: " + self.nombre + "\n" + \
+               "Tiempo de preparación: " + str(self.tiempo) + " minutos\n" + \
+               "Dificultad: " + str(self.dificultad) + "\n" + \
+               "Porciones: " + str(self.porciones) + "\n" + \
+               "Tipo de plato: " + str(self.tipo_plato) + "\n" + \
+               "-"*40
+
+# Una vez tengo un tipo de dato definido.. puedo empezar a crear datos de ese tipo
+receta_de_tortilla_de_papatas = Receta(
+                                            nombre = "Tortilla de patatas",
+                                            tiempo = 30,
+                                            dificultad = Dificultad.MEDIA,
+                                            porciones = 4,
+                                            tipo_plato = TipoPlato.UNICO,
+                                            ingredientes = ["patatas", "huevos", "sal"],
+                                            procedimiento = ["Pelar las patatas", "Cocinar las patatas", "Batir los huevos", "Mezclar todo", "Cocinar la mezcla"]
+                                       )
+receta_de_tortilla_francesa = Receta("Tortilla a la francesa")
+receta_de_bacalao_confitao = Receta("Bacalao confitado")
+receta_de_tortilla_de_papatas.imprimir()
+receta_de_bacalao_confitao.imprimir()
+
+print(str(receta_de_tortilla_de_papatas))
+
+#int  33 98
+# Hay una cosa que necesitamos MEMORIZAR. Cuando ejecutamos uan función como esas:
+# Receta() o similar, python lo que hace es ejecutar una función
+# que debe estar definida dentro de la clase a la que estamos llamando:
+# __init__(self)
+# Esa función recibe un argumento al menos: self.
+# Pero ese argumento NO LO PASAMOS NOSOTROS al escribir Receta()
+# Python crea un dato al escribir nosotros Receta() y pasa en automático ese dato a la función __init__
+# como valor de self
+# Ese argumento self representa el ALMA/la ENTIDAD nueva que estamos creando.
+
+# Imprime el tipo de datos del objeto al que apunta la variable receta_de_tortilla_de_papatas
+#print(type(receta_de_tortilla_de_papatas))
+#print(type(33))

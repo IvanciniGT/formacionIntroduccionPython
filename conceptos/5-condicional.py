@@ -12,12 +12,13 @@ print( "Hola " + nombre + ". Tienes " + edad + " años.")
 #     CODIGO QUE DEBE EJECUTARSE SI NINGUNA DE LAS ANTERIORES ES VERDADERA
 
 if int(edad) >= 100:
-    print( "Por lo tanto eres un superviviente!") 
+                        print( "Por lo tanto eres un superviviente!") 
 elif int(edad) >= 18:
     print( "Por lo tanto eres mayor de edad")
 else:
     if int(edad) >= 0:
-        print( "Por lo menos has nacido")  # Statement (Sentencia ~ Frase)
+        #print( "Por lo menos has nacido")  # Statement (Sentencia ~ Frase)
+        pass
     else:
         print( "Estás en proyecto")
 
