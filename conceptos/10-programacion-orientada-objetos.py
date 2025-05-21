@@ -59,6 +59,16 @@ class TipoPlato(IntEnum):
     def __str__(self):
         return str(self.name).title()
 
+class Ingrediente:
+
+    def __init__(self, nombre, cantidad, unidad):
+        self.nombre = nombre
+        self.cantidad = cantidad
+        self.unidad = unidad
+
+    def __str__(self):
+        return f"{self.cantidad} {self.unidad} de {self.nombre}"
+
 # Me voy a definir mi nuevo tipo de dato
 class Receta:
 
@@ -107,13 +117,16 @@ receta_de_tortilla_de_papatas = Receta(
                                             dificultad = Dificultad.MEDIA,
                                             porciones = 4,
                                             tipo_plato = TipoPlato.UNICO,
-                                            ingredientes = ["patatas", "huevos", "sal"],
+                                            ingredientes = [
+                                                Ingrediente("Patatas", 4, "unidades"),
+                                                Ingrediente("Huevos", 4, "unidades"),
+                                                Ingrediente("Cebolla", 1, "unidad"),
+                                                Ingrediente("Aceite de oliva", 100, "ml"),
+                                                Ingrediente("Sal", 1, "cucharadita")
+                                            ],
                                             procedimiento = ["Pelar las patatas", "Cocinar las patatas", "Batir los huevos", "Mezclar todo", "Cocinar la mezcla"]
                                        )
-receta_de_tortilla_francesa = Receta("Tortilla a la francesa")
-receta_de_bacalao_confitao = Receta("Bacalao confitado")
 receta_de_tortilla_de_papatas.imprimir()
-receta_de_bacalao_confitao.imprimir()
 
 print(str(receta_de_tortilla_de_papatas))
 
@@ -131,3 +144,4 @@ print(str(receta_de_tortilla_de_papatas))
 # Imprime el tipo de datos del objeto al que apunta la variable receta_de_tortilla_de_papatas
 #print(type(receta_de_tortilla_de_papatas))
 #print(type(33))
+
