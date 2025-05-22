@@ -84,7 +84,7 @@ class Receta:
         self.ingredientes = ingredientes
         self.procedimiento = procedimiento
 
-    def escalarIngredientes(self, numero_de_comensales):
+    def escalar_ingredientes(self, numero_de_comensales):
         #ingredientes_escalados = []
         #factor_escalado = numero_de_comensales / self.porciones
         #for ingrediente in self.ingredientes:
