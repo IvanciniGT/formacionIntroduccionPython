@@ -1,0 +1,13 @@
+activo: true
+ciudad: Madrid
+direccion:
+  calle: Gran Via
+  codigo_postal: 28001
+  numero: 123
+edad: 30
+intereses:
+- "programaci\xF3n"
+- "m\xFAsica"
+- deportes
+nombre: Juan
+

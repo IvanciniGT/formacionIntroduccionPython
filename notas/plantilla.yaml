@@ -1,0 +1,158 @@
+# En yaml se pueden poner comentarios... no como en el JSON ese!!!
+# Aleluya! Por cierto.. para ello se usa la misma sintaxis que en Python #
+# Un fichero yaml puede tener muchos documentos YAML...
+# Cosa con la json ni sueña!!!
+# Cada documento empieza con tres guiones... salvo el primero
+---
+# Un documento yaml es un NODO.
+# Los nodos pueden ser de tipo ESCALAR (un valor suelto)
+# O de tipo COLECCION (un conjunto de valores)
+---
+# Nodos escalares
+# Número
+33
+---
+-17.98
+---
+# Valores lógicos
+True # A saber: también se puede usar "true" o "TRUE"
+---
+False # A saber: también se puede usar "false" o "FALSE"
+---
+# Textos... Lo más complejo con diferencia de yaml
+ho"
+l'a
+
+\n\t\\ #amigo
+---
+'ho
+"l''a
+
+#amigo\nFelipe\tMenchu'
+---
+"ho
+\"l'a
+
+#amigo\nFelipe\tMenchu"
+ # La contrabarra solo escapa dentro de comillas dobles
+
+# RESUMEN. Siempre usamos la sintaxis sin comillas... A no ser
+# que tenga dentro algun caracter que me joda, como el #... entonces uso 
+# la comilla que más me interese.
+# Y SOLO USAMOS ESTA SINTAXIS PARA TEXTOS QUE TENGAN UNA SOLA LINEA
+
+---
+# Resulta que en YAML hay otras 2 sintaxis alternativas para textos
+# literal
+|2-
+    Puedo escribir el texto 
+  que quiera
+  Con los caracteres raros que
+  me de la gana, como por ejemplo 
+  "l'a # \\ \n $:"|
+  ||||||
+  Lo que quiera
+
+# Se aplica al sangrado las mismas reglas que en python
+---
+# folded
+# La mismas reglas que el literal, pero los saltos de línea
+# se convierten en espacios
+>2-
+    Puedo escribir el texto 
+  que quiera
+  Con los caracteres raros que
+  me de la gana, como por ejemplo 
+  "l'a # \\ \n $:">
+  ||||||
+  Lo que quiera
+---
+# Nodos de tipo Colección
+# Hay muchos...os cuento solo 2:
+# Listas ordenadas
+- elemento1
+- True
+- 33
+- 
+      - s1
+      - s2
+-     - ss1
+      - ss2
+---
+# Hay una sintaxis alternativa para las listas
+[
+  "elemento1",
+  true,
+  33,
+  ["s1", "s2"],
+  ["ss1", "ss2"]
+]
+# Esta sintaxis esta para compatibilidad con JSON
+# Y está totalmente desaconsejada en YAML...
+# Salvo en un caso
+---
+[] # Para una lista vacía no hay otra forma de representarla
+---
+# Mapas desordenados (diccionarios de python)
+clave: valor
+clave2: 33
+clave3: True
+clave4: 
+  - s1
+  - s2
+clave5:
+  s1: 1
+  s2: 2
+# Este es el tipo de documento yaml más habitual
+---
+# En yaml los mapas son DESORDENADOS
+clave1: valor1
+clave2: valor2
+clave3: valor3
+---
+clave3: valor3
+clave1: valor1
+clave2: valor2
+---
+# Esos 2 documentos son iguales
+
+#Por cierto.. en YAML hay 2 sintaxis para los mapas. El primero que pusimos, lo podríamos escribir como:
+{
+  "clave": "valor",
+  "clave2": 33,
+  "clave3": true,
+  "clave4": [s1, s2],
+  "clave5": {s1: 1, s2: 2}
+}
+
+# Esta sintaxis esta para compatibilidad con JSON
+# Y está totalmente desaconsejada en YAML...
+# Salvo en un caso
+---
+{} # Para un mapa vacío no hay otra forma de representarlo
+---
+# Y por ahora con esto nos vale
+---
+{
+  "nombre": "Juan",
+  "edad": 23,
+  "casado": false,
+  "hijos": null,
+  "hobbies": ["futbol", "natacion"],
+  "direccion": {
+    "calle": "Calle Falsa",
+    "numero": 123
+  }
+}
+---
+nombre:     Juan
+edad:       23
+casado:     false
+hijos:      null
+hobbies:
+          - futbol
+          - natacion
+direccion:
+  calle:    Calle Falsa
+  numero:   123
+---

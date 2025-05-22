@@ -60,3 +60,4 @@ varias lineas
 
 {0:1,1:2,2:3,3:4,4:5}   # [1,2,3,4,5]
 # Realmente una lista es simplemente un diccionario, en el que las claves son números enteros secuenciales comenzando en 0
+

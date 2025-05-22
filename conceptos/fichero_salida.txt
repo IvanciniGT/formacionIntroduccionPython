@@ -1,0 +1,39 @@
+{'nombre': 'Juan', 'edad': 30, 'ciudad': 'Madrid', 'intereses': ['programación', 'música', 'deportes'], 'activo': True, 'direccion': {'calle': 'Gran Via', 'numero': 123, 'codigo_postal': 28001}}
+Juan
+Gran Via
+música
+==================================================
+activo: true
+ciudad: Madrid
+direccion:
+  calle: Gran Via
+  codigo_postal: 28001
+  numero: 123
+edad: 30
+intereses:
+- "programaci\xF3n"
+- "m\xFAsica"
+- deportes
+nombre: Juan
+
+HOLA
+==================================================
+TEXTO LEIDO DEL FICHERO
+activo: true
+ciudad: Madrid
+direccion:
+  calle: Gran Via
+  codigo_postal: 28001
+  numero: 123
+edad: 30
+intereses:
+- "programaci\xF3n"
+- "m\xFAsica"
+- deportes
+nombre: Juan
+
+<class 'str'>
+==================================================
+OBJETO LEIDO DEL FICHERO
+{'activo': True, 'ciudad': 'Madrid', 'direccion': {'calle': 'Gran Via', 'codigo_postal': 28001, 'numero': 123}, 'edad': 30, 'intereses': ['programación', 'música', 'deportes'], 'nombre': 'Juan'}
+<class 'dict'>
