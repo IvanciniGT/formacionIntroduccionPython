@@ -1,0 +1,27 @@
+dificultad: MEDIA
+ingredientes:
+- cantidad: 4
+  nombre: Patatas
+  unidad: unidades
+- cantidad: 4
+  nombre: Huevos
+  unidad: unidades
+- cantidad: 1
+  nombre: Cebolla
+  unidad: unidad
+- cantidad: 100
+  nombre: Aceite de oliva
+  unidad: ml
+- cantidad: 1
+  nombre: Sal
+  unidad: cucharadita
+nombre: TORTILLA DE PATATAS
+porciones: 4
+procedimiento:
+- Pelar las patatas
+- Cocinar las patatas
+- Batir los huevos
+- Mezclar todo
+- Cocinar la mezcla
+tiempo: 30
+tipo_plato: UNICO

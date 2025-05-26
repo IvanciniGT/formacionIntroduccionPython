@@ -62,7 +62,8 @@ class TipoPlato(IntEnum):
 class Ingrediente:
 
     def __init__(self, nombre, cantidad, unidad):
-        self.nombre = nombre
+        self.nombre = nombre      # Todos estos datos, se guardan en un diccionario, asociado al objeto.
+                                  # Podemos acceder a ese diccionario a través de la propiedad __dict__
         self.cantidad = cantidad
         self.unidad = unidad
 

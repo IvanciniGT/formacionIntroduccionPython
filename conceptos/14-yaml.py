@@ -73,3 +73,25 @@ with open("usuario2.yaml", "r") as canal_con_el_fichero:
     print(usuario_leido)
     print(type(usuario_leido))
 
+
+#### 
+
+class Receta:
+    def __init__(self, nombre, tiempo):
+        self.nombre = nombre
+        self.tiempo = tiempo
+
+receta1 = Receta("Tortilla de patatas", 30)
+receta2 = Receta("Ensalada César", 15)
+
+with open("receta.yaml", "w") as canal_con_el_fichero:
+  yaml.dump(receta1, canal_con_el_fichero)
+
+# Eso de arriba, hace un destrozo en el fichero receta.yaml
+
+# Pero.. los objetos de python (los datos concretos que creamos de un tipo -Clase- concreto) tienen
+# una cosita guay... Una propiedad que se llama __dict__
+
+print(receta1.__dict__)
+
+print( receta2.__dict__)

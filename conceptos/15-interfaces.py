@@ -120,3 +120,7 @@ for figura in figuras:
 # Un circulo es una implementación de la interfaz FiguraGeometrica.
 # Un rectangulo es una implementación de la interfaz FiguraGeometrica.
 # Un cuadrado es una extensión de la clase Rectangulo, que a su vez es una implementación de la interfaz FiguraGeometrica.
+
+print(cuadrado1.__dict__)
+print(circulo1.__dict__)
+print(rectangulo1.__dict__)

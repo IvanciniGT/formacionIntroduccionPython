@@ -22,6 +22,19 @@ for numero in tupla:
     print("Voy por el", numero)
 
 for numero in range(1, 101, 1 ):
-    print("Voy por el", numero)    
+    print("Voy por el", numero)    # Statemets
 
     # range es otro de esas funciones que ya nos regala python
+
+lista_de_nombres = ["Pepe", "Juan", "Ana", "María"]
+
+lista_nombres_con_mayusculas =  [ nombre.upper() for nombre in lista_de_nombres ]
+
+# Eso sería equivalente a haber escrito:
+
+lista_nombres_con_mayusculas = []
+for nombre in lista_de_nombres:
+    lista_nombres_con_mayusculas.append(nombre.upper())
+
+    
+print("Lista de nombres en mayúsculas:", lista_nombres_con_mayusculas)
