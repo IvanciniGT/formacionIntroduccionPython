@@ -1,15 +1,8 @@
+from config.recetasappcomfig import configuracion
 from ui.ui import OpcionDeMenu
-from ui.ui import RecetasAppUI
-from ui.consoleui import RecetasConsoleUI
-from service.service import RecetasService
-from repository.repositoryaml import RecetaYAMLRepository
-from service.serviceimpl import RecetasServiceImpl
 
-REPOSITORIO = RecetaYAMLRepository()
-UI:RecetasAppUI = RecetasConsoleUI()
-SERVICE:RecetasService = RecetasServiceImpl(REPOSITORIO)
-
-def main(ui, servicio):
+def main():
+    ui, servicio = configuracion()  # Importamos la configuración de la UI y el servicio
     # He definido todo el flujo de la app. Con independencia de la UI y del servicio que se use... y del Repositorio
     ui.mostrar_bienvenida()
     while True:
@@ -57,4 +50,4 @@ def main(ui, servicio):
                 else:
                     ui.mostrar_mensaje("Operación cancelada.")
     
-main(UI,SERVICE)
+main()
