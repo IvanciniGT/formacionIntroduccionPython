@@ -1,7 +1,9 @@
 from ui import OpcionDeMenu
 from ui import RecetasAppUI
 from service import RecetasService
+from repository import RecetaYAMLRepository
 
+REPOSITORIO = RecetaYAMLRepository()
 UI:RecetasAppUI = None # TODO: Elegir una implementación concreta de la UI
 SERVICE:RecetasService = None # TODO: Elegir una implementación concreta del servicio
 

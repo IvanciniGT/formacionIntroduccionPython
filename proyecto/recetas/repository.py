@@ -17,9 +17,39 @@ class RecetaRepository:
 #
 
 import yaml
+import os
+import sys
+CARPETA_RECETAS_POR_DEFECTO = "./datos"
+
 # Ponemos: 1 receta por fichero
 class RecetaYAMLRepository(RecetaRepository):
    
+   def __init__(self):
+      self.ruta_carpeta_recetas = self.obtener_ruta_carpeta_recetas()
+      print(f"INFO: Las recetas se guardarán en: {self.ruta_carpeta_recetas}")
+
+   def obtener_ruta_carpeta_recetas(self):
+      ruta_a_devolver = self.obtener_ruta_carpeta_recetas_desde_argumento()
+      if not ruta_a_devolver:
+         ruta_a_devolver = self.obtener_ruta_carpeta_recetas_desde_variable_entorno()
+      if not ruta_a_devolver:
+         ruta_a_devolver = CARPETA_RECETAS_POR_DEFECTO
+      return ruta_a_devolver
+
+   def obtener_ruta_carpeta_recetas_desde_argumento(self):
+      argumentos_de_programa = sys.argv[1:]
+      for i, argumento in enumerate(argumentos_de_programa):
+         if argumento == '--recetas-path':
+            if i + 1 < len(argumentos_de_programa):
+               return argumentos_de_programa[i + 1]
+            else:
+               print("Error: Se esperaba un valor para --recetas-path")
+               exit(98) # SAL DEL PROGRAMA, EXPLOTANDO !!!!
+                       # 1 = Código de retorno del proceso que estoy corriendo
+
+   def obtener_ruta_carpeta_recetas_desde_variable_entorno(self):
+      return os.environ.get('RECETAS_PATH')
+
    def guardar(self, receta):
 
       diccionario_a_guardar = {

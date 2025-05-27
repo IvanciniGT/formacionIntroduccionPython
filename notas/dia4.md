@@ -92,3 +92,10 @@ Por defecto todo proceso en todo sistema operativo tiene asociados 3 canales:
         | v |
           2 Salida de error
 
+
+
+Cualquier proceso (programa corriendo en un SistemaOperativo) en cualquier SistemaOperativo acaba siempre con un código de salida/respuesta. Ese código es un número entre 0 y mucho.
+Si un programa sale con código 0, significa que todo ha ido bien. (Windows, MacOS, Linux, etc.)
+Si un programa sale con código distinto de 0, significa que algo ha ido mal. (Windows, MacOS, Linux, etc.)
+Habitualmente los programas usan esos códigos para indicar distintos tipos de errores.
+En linux, unix, podemos saber el código de salida del último comando ejecutado con la variable especial echo $?
