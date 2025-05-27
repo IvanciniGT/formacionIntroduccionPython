@@ -43,3 +43,10 @@ class RecetaYAMLRepository(RecetaRepository):
    def eliminar_receta(self, titulo):
       # Se implementa a nivel de cada implementación específica del repositorio
       pass
+
+# Queremos que nuestro repositorio, guarde los archivos en una carpeta que venga definida por:
+# 1. El argumento de programa --recetas-path DIRECTORIO
+# 2. La variable de entorno RECETAS_PATH=DIRECTORIO
+# 3. Si no se ha definido, se guardan dentro del directorio actual en la subcarpeta datos
+
+# 1 tiene más prioridad que 2
