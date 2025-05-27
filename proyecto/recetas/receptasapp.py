@@ -1,11 +1,13 @@
-from ui import OpcionDeMenu
-from ui import RecetasAppUI
-from service import RecetasService
-from repository import RecetaYAMLRepository
+from ui.ui import OpcionDeMenu
+from ui.ui import RecetasAppUI
+from ui.consoleui import RecetasConsoleUI
+from service.service import RecetasService
+from repository.repositoryaml import RecetaYAMLRepository
+from service.serviceimpl import RecetasServiceImpl
 
 REPOSITORIO = RecetaYAMLRepository()
-UI:RecetasAppUI = None # TODO: Elegir una implementación concreta de la UI
-SERVICE:RecetasService = None # TODO: Elegir una implementación concreta del servicio
+UI:RecetasAppUI = RecetasConsoleUI()
+SERVICE:RecetasService = RecetasServiceImpl(REPOSITORIO)
 
 def main(ui, servicio):
     # He definido todo el flujo de la app. Con independencia de la UI y del servicio que se use... y del Repositorio

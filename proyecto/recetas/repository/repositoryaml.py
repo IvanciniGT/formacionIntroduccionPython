@@ -1,21 +1,4 @@
 
-class RecetaRepository:
-
-   def guardar(self, receta):
-      # Se implementa a nivel de cada implementación específica del repositorio
-      pass
-   def recuperar_receta(self, titulo):
-      # Se implementa a nivel de cada implementación específica del repositorio
-      pass
-   def recuperar_recetas(self):
-      # Se implementa a nivel de cada implementación específica del repositorio
-      pass
-   def eliminar_receta(self, titulo):
-      # Se implementa a nivel de cada implementación específica del repositorio
-      pass
-   
-#
-
 import yaml
 import os
 import sys
@@ -23,6 +6,7 @@ from models.receta import Receta
 from models.dificultad import Dificultad
 from models.tipoplato import TipoPlato
 from models.ingrediente import Ingrediente
+from .repository import RecetaRepository
 
 
 
@@ -102,8 +86,15 @@ class RecetaYAMLRepository(RecetaRepository):
          )
 
    def recuperar_recetas(self):
-      # Se implementa a nivel de cada implementación específica del repositorio
-      pass
+         return list(
+            map(
+               lambda nombre_archivo: self.recuperar_receta(nombre_archivo[:-5]), 
+                filter(
+                  lambda nombre_archivo: nombre_archivo.endswith('.yaml'),
+                   os.listdir(self.ruta_carpeta_recetas)
+                )
+            )
+         ) if os.path.exists(self.ruta_carpeta_recetas) else []
 
    def eliminar_receta(self, titulo):
       ruta = self.obtener_ruta_receta(titulo)

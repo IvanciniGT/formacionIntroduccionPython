@@ -19,3 +19,4 @@ class RecetasService:
     def actualizar_receta(self, receta):
         #Se implementa a nivel de cada implementación específica del repositorio
         pass
+
