@@ -19,6 +19,13 @@ class RecetaRepository:
 import yaml
 import os
 import sys
+from models.receta import Receta
+from models.dificultad import Dificultad
+from models.tipoplato import TipoPlato
+from models.ingrediente import Ingrediente
+
+
+
 CARPETA_RECETAS_POR_DEFECTO = "./datos"
 
 # Ponemos: 1 receta por fichero
@@ -50,6 +57,10 @@ class RecetaYAMLRepository(RecetaRepository):
    def obtener_ruta_carpeta_recetas_desde_variable_entorno(self):
       return os.environ.get('RECETAS_PATH')
 
+   def obtener_ruta_receta(self, nombre):
+      # Devuelve la ruta completa del fichero donde se guardará la receta
+      return os.path.join(self.ruta_carpeta_recetas, f"{nombre}.yaml")
+
    def guardar(self, receta):
 
       diccionario_a_guardar = {
@@ -61,18 +72,46 @@ class RecetaYAMLRepository(RecetaRepository):
          'ingredientes': [ ingrediente.__dict__ for ingrediente in receta.ingredientes ],
          'procedimiento': receta.procedimiento
       }
-      with open(f"{receta.nombre}.yaml", 'w') as canal_escritura_a_fichero:
+      with open(f"{self.obtener_ruta_receta(receta)}", 'w') as canal_escritura_a_fichero:
          yaml.dump(diccionario_a_guardar, canal_escritura_a_fichero)
 
    def recuperar_receta(self, titulo):
-      # Se implementa a nivel de cada implementación específica del repositorio
-      pass
+
+      ruta = self.obtener_ruta_receta(titulo)
+
+      if not os.path.exists(ruta):
+         return
+
+      with open(ruta, 'r') as canal_lectura_de_fichero:
+
+         diccionario_receta = yaml.safe_load(canal_lectura_de_fichero)
+
+         ingredientes = [
+            Ingrediente(ingrediente['nombre'],ingrediente['cantidad'],ingrediente['unidad'])
+               for ingrediente in diccionario_receta['ingredientes']
+         ]
+
+         return Receta(
+            nombre=diccionario_receta['nombre'],
+            tiempo=diccionario_receta['tiempo'],
+            dificultad=Dificultad[diccionario_receta['dificultad']],
+            porciones=diccionario_receta['porciones'],
+            tipo_plato=TipoPlato[diccionario_receta['tipo_plato']],
+            ingredientes=ingredientes,
+            procedimiento=diccionario_receta['procedimiento']
+         )
+
    def recuperar_recetas(self):
       # Se implementa a nivel de cada implementación específica del repositorio
       pass
+
    def eliminar_receta(self, titulo):
-      # Se implementa a nivel de cada implementación específica del repositorio
-      pass
+      ruta = self.obtener_ruta_receta(titulo)
+      if os.path.exists(ruta):
+         try:
+            os.remove(ruta)
+         except OSError:
+            pass
 
 # Queremos que nuestro repositorio, guarde los archivos en una carpeta que venga definida por:
 # 1. El argumento de programa --recetas-path DIRECTORIO
