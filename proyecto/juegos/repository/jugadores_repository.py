@@ -1,3 +1,4 @@
+# Guardaremos los datos en unos ficheros
 
 class RepositorioJugadores:
     def recuperar_jugador(self, nombre_jugador):

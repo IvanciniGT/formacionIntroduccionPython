@@ -1,5 +1,6 @@
 
 class JuegosAppUI:
+    
     def mostrar_bienvenida(self):
         pass
     def conseguir_nombre_jugador(self):
