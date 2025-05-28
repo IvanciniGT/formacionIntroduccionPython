@@ -10,7 +10,7 @@ class JuegoAhorcadoUI:
     def muestra_estado_partida(self, partida):
         pass
 
-    def pedir_letra(self, letras_usadas):
+    def pedir_letra(self):
         pass
 
     def mostrar_resultado(self, partida):

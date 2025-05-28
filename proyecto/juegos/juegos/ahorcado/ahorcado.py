@@ -1,11 +1,12 @@
 from models.juego import Juego, ResultadoPartida
-from .models import DatosPartidaAhorcado
+from juegos.ahorcado.models.datos_partida_ahorcado import DatosPartidaAhorcado
 NOMBRE = "Ahorcado"
 REGLAS = "Adivina la palabra antes de que se acaben los intentos."
 VIDAS_POR_DEFECTO = 6
 
-
-
+CARACTERES_NO_ADIVINABLES = ". -,¿?!¡:;()"
+A_REEMPLAZAR = "áéíóúü"
+REEMPLAZOS = "aeiouu"
 
 class JuegoAhorcado(Juego):
 
@@ -31,7 +32,7 @@ class JuegoAhorcado(Juego):
         self.ui.muestra_estado_partida(partida)
         while self.no_ha_acabado(partida):
             # Pedir una letra
-            letra= self.ui.pedir_letra(partida.letras_usadas)
+            letra= self.ui.pedir_letra()
             self.proceso_letra(partida, letra)
             self.ui.muestra_estado_partida(partida)
     
@@ -39,17 +40,49 @@ class JuegoAhorcado(Juego):
         self.ui.mostrar_resultado(partida)
         return ResultadoPartida.GANADO if self.he_ganado(partida) else ResultadoPartida.PERDIDO
         
+
+
+
+
     def enmascarar_palabra(self, palabra, letras_usadas):
-        pass
+        # Enmascara la palabra con guiones bajos para las letras no usadas
+        return ''.join(letra if letra in CARACTERES_NO_ADIVINABLES or self.coincide_con_alguna(letra, letras_usadas) else '_' 
+                       for letra in palabra)
 
     def no_ha_acabado(self, partida):
-        pass
-
-    def proceso_letra(self, partida, letra):
-        pass
+        return partida.vidas > 0 and not self.he_ganado(partida)
 
     def he_ganado(self, partida):
-        pass
+        return partida.palabra_enmascarada == partida.palabra
+
+    def proceso_letra(self, partida, letra):
+        # Procesa la letra introducida por el jugador
+        if self.coincide_con_alguna(letra, partida.letras_usadas):
+            # quito vida
+            partida.vidas -= 1
+            return
+        partida.letras_usadas.append(letra)
+        if(not self.coincide_con_alguna(letra, partida.palabra)):
+            partida.vidas -= 1
+        else: 
+            partida.palabra_enmascarada = self.actualizar_palabra_enmascarada(partida.palabra, letra)
+
+    def coincide_con_alguna(self, letra, letras_usadas):
+        return any(self.son_iguales_las_letras(letra, usada) for usada in letras_usadas)
+
+    def son_iguales_las_letras(self, letra1, letra2):
+        # Compara dos letras, teniendo en cuenta acentos y mayúsculas
+        letra1= letra1.lower()
+        letra2= letra2.lower()
+        if letra1 in A_REEMPLAZAR:
+            letra1 = REEMPLAZOS[A_REEMPLAZAR.index(letra1)]
+        if letra2 in A_REEMPLAZAR:
+            letra2 = REEMPLAZOS[A_REEMPLAZAR.index(letra2)]
+        return letra1 == letra2
+
+
+
+
 
 # Para pruebas, me gustaría poder llamar yo aqui a la función jugar_partida
 # Eso lo podemos hacer metiendo código en un if __name__ == "__main__":
@@ -58,9 +91,9 @@ if __name__ == "__main__": # Esto hace que el código de dentro
     # Y no si se importa desde otro sitio
     # Nos viene genial para pruebas
     from models.jugador import Jugador
-    from .repository import RepositorioPalabrasYaml
-    from .ui import JuegoAhorcadoUIConsola
-    from .config import AhorcadoConfig
+    from juegos.ahorcado.repository.repositoriopalabrasyaml import RepositorioPalabrasYaml
+    from juegos.ahorcado.ui.ahorcadouiconsola import JuegoAhorcadoUIConsola
+    from juegos.ahorcado.config.ahorcadoconfig import AhorcadoConfig
 
     config = AhorcadoConfig(
         ui=JuegoAhorcadoUIConsola(),
