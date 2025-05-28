@@ -1,4 +1,4 @@
-from resultado import ResultadoPartida
+from .resultado import ResultadoPartida
 
 class Juego:
 

@@ -1,5 +1,5 @@
-from estadistica import Estadistica
-from resultado import ResultadoPartida
+from .estadistica import Estadistica
+from .resultado import ResultadoPartida
 
 class Jugador:
     def __init__(self, nombre, estadisticas = {}):
