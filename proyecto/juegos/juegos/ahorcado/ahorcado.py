@@ -65,7 +65,7 @@ class JuegoAhorcado(Juego):
         if(not self.coincide_con_alguna(letra, partida.palabra)):
             partida.vidas -= 1
         else: 
-            partida.palabra_enmascarada = self.actualizar_palabra_enmascarada(partida.palabra, letra)
+            partida.palabra_enmascarada = self.enmascarar_palabra(partida.palabra, partida.letras_usadas)
 
     def coincide_con_alguna(self, letra, letras_usadas):
         return any(self.son_iguales_las_letras(letra, usada) for usada in letras_usadas)
