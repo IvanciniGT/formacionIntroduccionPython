@@ -28,7 +28,13 @@ class PiedraPapelTijeraUIConsola(PiedraPapelTijeraUI):
         print(f"Computadora eligió: {opcion_computadora}")
         print(f"Resultado de la ronda: {resultado.name}")
 
-    def mostrar_resumen(self, resultado):
+    def mostrar_resumen(self, resultado, resultados_rondas):
+        print("Así quedó la cosa:")
+
+        print(f"Rondas ganadas: {resultados_rondas[ResultadoPartida.GANADO.value]}")
+        print(f"Rondas perdidas: {resultados_rondas[ResultadoPartida.PERDIDO.value]}")
+        print(f"Rondas empatadas: {resultados_rondas[ResultadoPartida.EMPATE.value]}")
+
         if(resultado == ResultadoPartida.GANADO):
             print("¡Felicidades! Has ganado la partida.")   
         elif(resultado == ResultadoPartida.PERDIDO):

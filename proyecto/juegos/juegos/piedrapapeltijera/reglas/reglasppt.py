@@ -20,9 +20,9 @@ class ReglasPiedraPapelTijera(Reglas):
             "Piedra, Papel, Tijera",
             ["PIEDRA", "PAPEL", "TIJERA"],
             [
-                [ResultadoPartida.EMPATADO, ResultadoPartida.GANADO, ResultadoPartida.PERDIDO],  # PIEDRA
-                [ResultadoPartida.PERDIDO, ResultadoPartida.EMPATADO, ResultadoPartida.GANADO],  # PAPEL
-                [ResultadoPartida.GANADO, ResultadoPartida.PERDIDO, ResultadoPartida.EMPATADO]   # TIJERA
+                [ResultadoPartida.EMPATE, ResultadoPartida.GANADO, ResultadoPartida.PERDIDO],  # PIEDRA
+                [ResultadoPartida.PERDIDO, ResultadoPartida.EMPATE, ResultadoPartida.GANADO],  # PAPEL
+                [ResultadoPartida.GANADO, ResultadoPartida.PERDIDO, ResultadoPartida.EMPATE]   # TIJERA
             ],
             """
             En Piedra, Papel, Tijera, cada jugador elige una de las tres opciones. 
